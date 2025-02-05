@@ -2,22 +2,22 @@
 
 ClapTrap::ClapTrap(): name("Default"), hp(10), energy(10), damage(0)
 {
-	std::cout << "ClapTrap" << name << " Constructeur" << std::endl;
+	std::cout << name << " Constructeur" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string newName) : name(newName), hp(10), energy(10), damage(0)
 {
-	std::cout << "ClapTrap" << name << " Constructor" << std::endl;
+	std::cout << name << " constructor" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &other): name(other.name), hp(other.hp), energy(other.energy), damage(other.damage)
 {
-	std::cout << "ClapTrap" << "Constr cpy called" << std::endl;
+	std::cout << "Constr cpy called" << std::endl;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 {
-	std::cout << "ClapTrap" << "Surcharge ops called" << std::endl;
+	std::cout << "Surcharge ops called" << std::endl;
 	name = other.name;
 	hp = other.hp;
 	energy = other.energy;
@@ -28,16 +28,23 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 
 void ClapTrap::attack(const std::string& target)
 {
+	if (hp <= 0)
+	{
+		std::cout << "ClapTrap "<< name << " is dead and cannot attak" << std::endl;
+		return;
+	}
 	if (energy)
 	{
 		energy--;
-		std::cout << "ClapTrap " << name << " attacks " << target << ", causing " << damage << " points of damage!" << std::endl;
+		std::cout << "ClapTrap " << name << " attacks " << target << " , causing " << damage << " points of damage!" << std::endl;
 	}
+	else
+		std::cout << "ClapTrap " << name << " feels exhaust he can't strike" << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	if (hp >= amount)
+	if (hp > amount)
 	{
 		hp -= amount;
 		std::cout << "ClapTrap " << name << " has been attacked and lost " << amount << " hp" << std::endl;
@@ -45,7 +52,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 	else
 	{
 		hp = 0;
-		std::cout << "ClapTrap " << name << " has been atacked and has died of its wounds" << std::endl;
+		std::cout << "ClapTrap " << name << "take's " << amount << "dammage : RIP" << std::endl;
 	}
 
 }
@@ -53,21 +60,21 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (energy == 0)
 		std::cout << "ClapTrap " << name << " doesn't have enough energy to repair itself !" << std::endl;
-	else if (hp == 0)
-		std::cout << "ClapTrap " << name << " is dead, doesn't have enough hp to repair itself !" << std::endl;
+	else if (hp <= 0)
+		std::cout << "ClapTrap " << name << " is dead  cqnnot repqir itself!" << std::endl;
 	else if (hp >= 10)
 		std::cout << "ClapTrap " << name << " already has " << hp << " hp !" << std::endl;
 	else
 	{
-		if ((hp + amount) > 10)
+		if (hp + amount > 10)
 			amount = 10 - hp;
 		energy--;
 		hp += amount;
-		std::cout << "ClapTep " << name << " healded ! and now have " << hp << " hp" << std::endl;
+		std::cout << "ClapTrap" << name << " has healed and have now : " << hp << " hp!" << std::endl;
 	}
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "ClapTrap" << name << "D E S T R U C T O R R R" << std::endl;
+	std::cout << "D E S T R U C T O R R R" << std::endl;
 }

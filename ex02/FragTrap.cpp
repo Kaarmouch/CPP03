@@ -30,7 +30,7 @@ FragTrap& FragTrap::operator=(const FragTrap& copy)
 
 void FragTrap::highFivesGuys()
 {
-	if (hp)
+	if (hp > 0)
 		std::cout << "FIVE HIGH GUYZ ?!?" << std::endl;
 }
 

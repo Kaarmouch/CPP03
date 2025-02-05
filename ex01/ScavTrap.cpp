@@ -1,13 +1,13 @@
 #include "ScavTrap.hpp"
 
 
-ScavTrap::ScavTrap(): ClapTrap()
+ScavTrap::ScavTrap(): ClapTrap("Default")
 {
 	hp = 100;
 	energy = 50;
 	damage = 20;
 	gate = false;
-	std::cout << "ScavTrap " << name << ": Constructor called" << std::endl;
+	std::cout << "ScavTrap : Constructor called" << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap& copy): ClapTrap(copy)
@@ -36,11 +36,18 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& copy)
 
 void ScavTrap::attack(const std::string& target)
 {
+	if (hp <= 0)
+	{
+		std::cout << "ScavTrap "<< name << " is dead and cannot attak" << std::endl;
+		return;
+	}
 	if (energy)
 	{
 		energy--;
-		std::cout << "ScavTrap " << name << " attacks " << target << ", causing " << damage << " points of damage!" << std::endl;
+		std::cout << "ScavTrap " << name << " attacks " << target << " , causing " << damage << " points of damage!" << std::endl;
 	}
+	else
+		std::cout << "ScavTrap " << name << " feels exhaust he can't strike" << std::endl;
 }
 
 void ScavTrap::guardGate()
