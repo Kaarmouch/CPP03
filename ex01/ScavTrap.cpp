@@ -52,13 +52,13 @@ void ScavTrap::attack(const std::string& target)
 
 void ScavTrap::guardGate()
 {
-	if (gate)
+	if (hp <= 0)
 	{
-		std::cout << "ScavTrap " << name << " is already in Gate keeper mode" << std::endl;
+		std::cout << "No gate when u dead" << std::endl;
 		return ;
 	}
-	gate = true;
-	std::cout << "ScavTrap " << name << " is now in Gate keeper mode" << std::endl;
+	gate = !gate;
+	std::cout << "ScavTrap " << name << (gate ? " is now in Gate Keeper mode" : " has exited Gate Keeper mode") << std::endl;
 }
 
 ScavTrap::~ScavTrap()
