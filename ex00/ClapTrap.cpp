@@ -2,12 +2,12 @@
 
 ClapTrap::ClapTrap(): name("Default"), hp(10), energy(10), damage(0)
 {
-	std::cout << name << " Constructeur" << std::endl;
+	std::cout << "ClapTrap " << name << " Constructeur" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string newName) : name(newName), hp(10), energy(10), damage(0)
 {
-	std::cout << name << " constructor" << std::endl;
+	std::cout << "ClapTrap " << name << " constructor" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &other): name(other.name), hp(other.hp), energy(other.energy), damage(other.damage)
@@ -58,12 +58,21 @@ void ClapTrap::takeDamage(unsigned int amount)
 }
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	if (energy == 0)
-		std::cout << "ClapTrap " << name << " doesn't have enough energy to repair itself !" << std::endl;
-	else if (hp <= 0)
+	if (hp <= 0)
+	{
 		std::cout << "ClapTrap " << name << " is dead  cqnnot repqir itself!" << std::endl;
+		return ;
+	}
+	else if (energy == 0)
+	{
+		std::cout << "ClapTrap " << name << " doesn't have enough energy to repair itself !" << std::endl;
+		return ;
+	}
 	else if (hp >= 10)
+	{
 		std::cout << "ClapTrap " << name << " already has " << hp << " hp !" << std::endl;
+		return ;
+	}
 	else
 	{
 		if (hp + amount > 10)

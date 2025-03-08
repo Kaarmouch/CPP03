@@ -23,15 +23,20 @@ FragTrap::FragTrap(const std::string& _name) : ClapTrap(_name)
 
 FragTrap& FragTrap::operator=(const FragTrap& copy)
 {
-	ClapTrap::operator=(copy);
-	std::cout <<"FragTrap " << name << ": ""Assignation operator called" << std::endl;
+	if (this != &copy)
+	{
+		ClapTrap::operator=(copy);
+		std::cout <<"FragTrap " << name << ": ""Assignation operator called" << std::endl;
+	}
 	return *this;
 }
 
 void FragTrap::highFivesGuys()
 {
 	if (hp > 0)
-		std::cout << "FIVE HIGH GUYZ ?!?" << std::endl;
+		std::cout << "FragTrap " << name << " is asking for a high five! ✋" << std::endl;
+	else
+		std::cout << "FragTrap " << name << " is too weak to ask for a high five... 😢" << std::endl;
 }
 
 FragTrap::~FragTrap()
